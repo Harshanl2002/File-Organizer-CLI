@@ -1,7 +1,8 @@
+import { browseFilesAndFolders } from "./utils/BrowseFolders";
 import { getAllDiskNames } from "./utils/getDrives";
 import ask from "./utils/Inquire";
 
-const getUserInput = async () => {
+const getUserDriveChoice = async () => {
     try {
         const drives: string[] = await getAllDiskNames();
         const { drive } = await ask([{
@@ -10,12 +11,23 @@ const getUserInput = async () => {
             message: "Please Select the Drive",
             choices: drives
         }]);
-        console.log("Selected Drive: ", drive);
+        return drive;
     }
     catch (err) {
-        console.log(err);
+        throw err;
+    }
+}
+
+
+const mainApp  = async ()=>{
+    try{
+        const userDrive = await  getUserDriveChoice();
+        let userSelectedPath = await browseFilesAndFolders(`${userDrive}//`);
+        console.log(userSelectedPath);
+    }catch(err){
+        console.log("Unknown Error");
         return;
     }
 }
 
-getUserInput();
+mainApp();

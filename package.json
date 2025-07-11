@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "ts-node src/app.ts"
+    "start": "ts-node src/app.ts",
+    "build-and-bundle": "tsc && pkg dist/app.js --targets node18-win-x64 --output archive/app.exe"
   },
   "keywords": [],
   "author": "",

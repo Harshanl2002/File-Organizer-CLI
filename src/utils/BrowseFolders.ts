@@ -11,6 +11,8 @@ export const browseFilesAndFolders = async (path: string): Promise<string> => {
         }
         const entries = await getAllFileNames(path);
 
+        console.log(entries);
+
         const choices: Choice[] = entries.map(entry => ({
             name: entry.name,
             value: `${path}${entry.name}//`,

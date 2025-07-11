@@ -9,6 +9,9 @@ export const getAllFileNames = async (currentPath: string): Promise<Dirent<strin
             const isSystemFolder = isProtectedSystemFolder(`${currentPath}${eachEntry.name}`);
             return !isHiddenFile && !isSystemFolder;
         });
+        if(entries.length > 0 && filteredEntries.length == 0){
+            throw new Error("Can't Edit the System Files/Folders.");
+        }
         return filteredEntries.sort((a, b) => {
             if (a.isDirectory() && !b.isDirectory()) return -1;
             if (!a.isDirectory() && b.isDirectory()) return 1;

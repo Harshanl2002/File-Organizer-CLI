@@ -41,7 +41,7 @@ export function isProtectedSystemFolder(fullPath: string): boolean {
             'c://recovery', 'c://boot', 'c://users//default',
             'c://users//public', 'c://programdata'
         ];
-        if (normalized.endsWith('appData')) {
+        if (normalized.endsWith('appdata')) {
             return true;
         }
         return protectedFolders.some(folder => normalized.startsWith(folder));

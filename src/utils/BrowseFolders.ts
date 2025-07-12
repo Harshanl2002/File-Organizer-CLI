@@ -18,6 +18,7 @@ export const browseFilesAndFolders = async (path: string): Promise<string> => {
     }));
 
     const hasDirectory = entries.some(eachEntry => eachEntry.isDirectory());
+    const platform = process.platform;
 
     // Add "Go Back" option if not at root
     const goBackChoice = pathList.length > 1 ? [{
@@ -27,17 +28,19 @@ export const browseFilesAndFolders = async (path: string): Promise<string> => {
         short: "Go Back"
     }] : [];
 
+    const OrganizeChoice = (platform === 'win32' && path.toLowerCase() !== 'c://users//') && pathList.length > 1 && entries.length > 0 ? [{
+                name: "Organize",
+                value: `${path}Opt`,
+                disabled: false,
+                short: "Organize"
+            }] : [];
+
     const { path: selectedPath } = await ask([{
         type: "list",
         name: "path",
         message: "Please Select the Folder to be organized:",
         choices: [
-            ...(path.toLowerCase() !== 'c://users//' ? [{
-                name: "Organize",
-                value: `${path}Opt`,
-                disabled: false,
-                short: "Organize"
-            }] : []),
+            ...OrganizeChoice,
             ...goBackChoice,
             ...choices
         ]

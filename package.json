@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "start": "ts-node src/app.ts",
-    "build-and-bundle": "tsc && pkg dist/app.js --targets node18-win-x64 --output archive/app.exe"
+    "build": "tsc && pkg dist/app.js --targets node18-win-x64 --output out/app.exe"
   },
   "keywords": [],
   "author": "",
